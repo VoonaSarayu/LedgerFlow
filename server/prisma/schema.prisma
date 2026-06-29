@@ -1,0 +1,173 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum InvoiceStatus {
+  DRAFT
+  SENT
+  PAID
+  OVERDUE
+  VOID
+}
+
+enum PaymentStatus {
+  SUCCESS
+  FAILED
+  PENDING
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  CANCELED
+  PAST_DUE
+  TRIALING
+}
+
+model Company {
+  id            String         @id @default(uuid())
+  name          String
+  domain        String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  users         User[]
+  customers     Customer[]
+  invoices      Invoice[]
+  subscriptions Subscription[]
+  payments      Payment[]
+  activityLogs  ActivityLog[]
+
+  @@index([name])
+}
+
+model Role {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  permissions Json     // List of string permissions or detailed permissions configuration
+  users       User[]
+
+  @@index([name])
+}
+
+model User {
+  id           String        @id @default(uuid())
+  email        String        @unique
+  password     String
+  firstName    String?
+  lastName     String?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  companyId    String
+  company      Company       @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  roleId       String
+  role         Role          @relation(fields: [roleId], references: [id])
+  activityLogs ActivityLog[]
+  refreshTokens RefreshToken[]
+
+  @@index([email])
+  @@index([companyId])
+  @@index([roleId])
+}
+
+model Customer {
+  id        String    @id @default(uuid())
+  name      String
+  email     String
+  status    String    @default("ACTIVE") // ACTIVE, INACTIVE
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  companyId String
+  company   Company   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  invoices  Invoice[]
+
+  @@unique([email, companyId])
+  @@index([companyId])
+  @@index([email])
+}
+
+model Invoice {
+  id            String        @id @default(uuid())
+  invoiceNumber String
+  amount        Float
+  status        InvoiceStatus @default(DRAFT)
+  dueDate       DateTime
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  customerId    String
+  customer      Customer      @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  companyId     String
+  company       Company       @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  payments      Payment[]
+
+  @@unique([invoiceNumber, companyId])
+  @@index([companyId])
+  @@index([customerId])
+  @@index([status])
+}
+
+model Subscription {
+  id        String             @id @default(uuid())
+  status    SubscriptionStatus @default(ACTIVE)
+  planName  String
+  price     Float
+  interval  String             // MONTHLY, YEARLY
+  startDate DateTime           @default(now())
+  endDate   DateTime?
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+  companyId String
+  company   Company            @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@index([status])
+}
+
+model Payment {
+  id            String        @id @default(uuid())
+  amount        Float
+  status        PaymentStatus @default(PENDING)
+  provider      String        // stripe, paypal, manual
+  transactionId String?
+  invoiceId     String
+  invoice       Invoice       @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  companyId     String
+  company       Company       @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@index([companyId])
+  @@index([invoiceId])
+  @@index([status])
+}
+
+model ActivityLog {
+  id        String   @id @default(uuid())
+  action    String
+  details   String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  companyId String
+  company   Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@index([companyId])
+  @@index([userId])
+  @@index([createdAt])
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([token])
+}
+

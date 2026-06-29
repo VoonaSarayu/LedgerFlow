@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Instrument+Serif:ital,wght@0,400;1,400&family=Fira+Code:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-brand-bg: #050816;
+  --color-brand-surface: rgba(11, 18, 32, 0.45);
+  --color-brand-primary: #6D5DF6;
+  --color-brand-accent: #22D3EE;
+  --color-brand-muted: #94A3B8;
+
+  --font-sans: 'Inter', sans-serif;
+  --font-serif: 'Instrument Serif', serif;
+  --font-mono: 'Fira Code', monospace;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #050816;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #6D5DF6;
+}
+
+/* Custom glassmorphism classes */
+.glass-panel {
+  background: rgba(11, 18, 32, 0.45);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glass-button {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Float keyframe animation */
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(0.5deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Custom layout resets */
+html, body {
+  background-color: #050816;
+  color: rgba(255, 255, 255, 0.8);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  height: 100%;
+}
+
+/* Skeleton pulse animation */
+@keyframes pulse-skeleton {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 0.15; }
+}
+
+.skeleton {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  animation: pulse-skeleton 1.8s ease-in-out infinite;
+}
+
