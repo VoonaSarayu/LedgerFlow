@@ -1,4 +1,4 @@
-# 📊 LedgerFlow
+# LedgerFlow
 
 LedgerFlow is a modern billing and invoicing platform designed for finance teams, SaaS operators, and business managers. It combines a premium, dark-mode user experience with a full-stack architecture for subscription tracking, invoice management, customer operations, and analytics.
 
