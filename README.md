@@ -1,18 +1,25 @@
-# LedgerFlow
+# LedgerFlow — AI-Powered Billing & Subscription Platform
 
-LedgerFlow is a modern billing and invoicing platform designed for finance teams, SaaS operators, and business managers. It combines a premium, dark-mode user experience with a full-stack architecture for subscription tracking, invoice management, customer operations, and analytics.
+[![GitHub](https://img.shields.io/badge/GitHub-LedgerFlow-181717?style=for-the-badge&logo=github)](https://github.com/VoonaSarayu/LedgerFlow)
+[![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react)](https://react.dev/)
+[![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?style=for-the-badge&logo=node.js)](https://nodejs.org/)
+[![Prisma](https://img.shields.io/badge/Prisma-6-2D3748?style=for-the-badge&logo=prisma)](https://www.prisma.io/)
+[![JWT](https://img.shields.io/badge/JWT-Auth-000000?style=for-the-badge&logo=jsonwebtokens)](https://jwt.io/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Built with React, TypeScript, Express, Prisma, and SQLite, LedgerFlow offers a polished dashboard experience with role-based access control, billing simulations, and an AI-assisted console for day-to-day financial workflows.
+LedgerFlow is a premium billing and invoicing platform built for modern finance teams, SaaS operators, and revenue-driven businesses. It brings together subscription management, invoice automation, customer insights, and AI-assisted operations into a single elegant experience.
+
+With a polished dark-mode UI and a robust full-stack architecture powered by React, TypeScript, Express, Prisma, and SQLite, LedgerFlow helps teams manage billing workflows with speed, clarity, and control.
 
 ---
 
-## ✨ Highlights
+## ✨ Key Features
 
 - AI-assisted billing console for natural-language operations and workflow simulation
 - Interactive billing playground for pricing and revenue scenario planning
-- Analytics dashboard with SaaS metrics such as MRR, LTV, churn, and payment performance
+- Analytics dashboard with SaaS metrics like MRR, LTV, churn, and payment performance
 - Customer and invoice management tools with structured statuses and workflow tracking
-- Role-based access control for secure multi-user collaboration
+- Secure role-based access control for multi-user collaboration
 - Premium glassmorphism-inspired UI with a modern dark theme
 
 ---
@@ -27,7 +34,7 @@ Whether you are overseeing a growing SaaS business or managing complex billing o
 
 ## 📸 Demo & Screenshots
 
-The interface is designed to feel premium and modern, with a dark, glassmorphic dashboard focused on clarity and usability. Key views include:
+LedgerFlow is designed to feel premium, modern, and highly usable. The following views highlight the experience across the product:
 
 - Dashboard overview with billing and growth insights
 - Invoices and customer management screens
@@ -36,13 +43,13 @@ The interface is designed to feel premium and modern, with a dark, glassmorphic 
 
 Below are live screenshots from the LedgerFlow application.
 
-**Dashboard & Metrics Overview**
+### Dashboard Overview
 ![Dashboard screenshot](public/screenshots/screenshot-hero.png)
 
-**Interactive Billing Playground**
+### Interactive Billing Playground
 ![Billing Playground screenshot](public/screenshots/screenshot-billing.png)
 
-**AI-Powered Developer Console**
+### AI-Powered Developer Console
 ![AI Console screenshot](public/screenshots/screenshot-console.png)
 
 ---
@@ -174,4 +181,3 @@ node test_api.js
 ## 🛡️ License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
-
